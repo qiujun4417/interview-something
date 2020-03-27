@@ -49,17 +49,26 @@ public class CMSGCSimulator {
      */
     public static void main(String[] args) {
 
-        byte[] firstAlloc = new byte[_1M * 4];
-        System.out.println("first allocation");
+        long start = System.currentTimeMillis();
+        for(int i=0; i<1000; i++){
+            byte[] firstAlloc = new byte[_1M * 4];
+            System.out.println("first allocation");
 
-        byte[] secondAlloc = new byte[_1M * 4];
-        System.out.println("second allocation");
-
-        byte[] thirdAlloc = new byte[_1M * 2];
-        System.out.println("third allocation");
-
-        byte[] fourthdAlloc = new byte[_1M * 4];
-        System.out.println("fourth allocation");
+            byte[] secondAlloc = new byte[_1M * 4];
+            System.out.println("second allocation");
+            firstAlloc = null;
+            System.out.println("gc 1 memory");
+            byte[] thirdAlloc = new byte[_1M * 3];
+            System.out.println("third allocation");
+            secondAlloc = null;
+            thirdAlloc = null;
+            System.out.println("gc 2~3 memory");
+            byte[] fourthdAlloc = new byte[_1M * 4];
+            System.out.println("fourth allocation");
+            fourthdAlloc = null;
+            System.out.println("gc 4 memory");
+        }
+        System.out.println("cost: " + (System.currentTimeMillis() - start));
 
     }
 }
